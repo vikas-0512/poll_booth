@@ -1,0 +1,62 @@
+POST http://localhost:8000/users/signup
+content-type: application/json
+
+{
+    "name": "vikas",
+    "email": "vikas@gmail.com",
+    "password": "vikas123"
+}
+
+###
+
+GET http://localhost:8000/users/login
+content-type: application/json
+
+{
+    "email": "vikas@gmail.com",
+    "password": "vikas123"
+}
+
+###
+POST http://localhost:8000/teams/add 
+content-type: application/json
+
+{
+    "teamname": "sap_3",
+    "userid": "2"
+}
+
+###
+POST http://localhost:8000/members/add 
+content-type: application/json
+
+{
+    "userid" : "1",
+    "teamid" : "3"
+}
+
+###
+POST http://localhost:8000/members/addemail
+content-type: application/json
+
+{
+    "email":"yesh@gmail.com",
+    "teamid": "2"
+}
+
+###
+POST http://localhost:8000/polls/addpoll/1
+content-type: application/json
+
+{
+    "pollname":"ok",
+}
+
+###
+DELETE  http://localhost:8000/polls/delmem
+content-type: application/json
+
+{
+    "teamid": "1",
+    "userid": "2"
+}

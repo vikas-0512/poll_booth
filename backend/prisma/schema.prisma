@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model users{
+  id Int @id @default(autoincrement())
+  name String
+  email String
+  password String
+  teams members[]
+}
+
+model teams{
+  teamid Int @id @default(autoincrement())
+  teamname String
+  creater Int
+  members members[]
+  polls polls[]
+}
+
+model members{
+  user users @relation(fields: [userid], references: [id])
+  userid Int
+  team teams @relation(fields: [teamid], references: [teamid])
+  teamid Int
+  @@unique([userid,teamid])
+}
+
+model polls{
+  pollid Int @id @default(autoincrement())
+  pollname String
+  des String?
+  options options[]
+  team teams @relation(fields: [teamid], references: [teamid])
+  teamid Int
+}
+
+model options{
+  optionid Int @id @default(autoincrement())
+  optionname String
+  poll polls @relation(fields: [pollid],references: [pollid])
+  pollid Int
+  votes Int @default(0)
+}
